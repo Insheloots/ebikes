@@ -1,0 +1,51 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir producto</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Listado de productos melito</h4>
+            {% if pro %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Precio/u</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for pr in pro %}   
+                        <tr>
+                            <th scope="row">{{pr.id}}</th>
+                            <td>{{pr.nombre_producto}}</td>
+                            <td>{{pr.cantidad_producto}}</td>
+                            <td>{{pr.descripcion_producto}}</td>
+                            <td>{{pr.precio_unit}}</td>
+                            <td>
+                                <a href="{% url 'updatedata' pr.id %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletedata' pr.id %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay productos registrados</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+
