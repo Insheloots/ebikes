@@ -10,12 +10,13 @@
             </form>
         </div>
         <div class="col-sm-9">
-            <h4 class="text-center alert alert-secondary">Listado de productos melito</h4>
-            {% if pro %}
+            <h4 class="text-center alert alert-secondary">Listado de productos</h4>
+            {% if producto %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Id</th>
+                        <th scope="col">Id_Tipo</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Descripción</th>
@@ -24,16 +25,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for pr in pro %}   
+                        {% for productos in producto %}   
                         <tr>
-                            <th scope="row">{{pr.id}}</th>
-                            <td>{{pr.nombre_producto}}</td>
-                            <td>{{pr.cantidad_producto}}</td>
-                            <td>{{pr.descripcion_producto}}</td>
-                            <td>{{pr.precio_unit}}</td>
+                            <td>{{productos.id}}</td>
+                            <td>{{productos.id_tipo}}</td>
+                            <td>{{productos.nombre_producto}}</td>
+                            <td>{{productos.cantidad_producto}}</td>
+                            <td>{{productos.descripcion_producto}}</td>
+                            <td>{{productos.precio_unit}}</td>
                             <td>
-                                <a href="{% url 'updatedata' pr.id %}" class="btn btn-secondary bt-sm" >Editar</a>
-                                <form action="{% url 'deletedata' pr.id %}" method="post" class="d-inline"> {% csrf_token %}
+                                <a href="{% url 'updatedata' productos.id %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletedata' productos.id %}" method="post" class="d-inline"> {% csrf_token %}
                                     <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
                                 </form>
                                 

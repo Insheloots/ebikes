@@ -1,0 +1,55 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir propietario</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Listado de Propietarios</h4>
+            {% if propietario %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Cedula</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Correo electrónico</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Fecha de nacimiento</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for propietarios in propietario %}   
+                        <tr>
+                            <td>{{propietarios.cedula_propietario}}</td>
+                            <td>{{propietarios.nombre}}</td>
+                            <td>{{propietarios.apellido}}</td>
+                            <td>{{propietarios.correo_electronico}}</td>
+                            <td>{{propietarios.direccion}}</td>
+                            <td>{{propietarios.telefono}}</td>
+                            <td>{{propietarios.fecha_nacimiento}}</td>
+                            <td>
+                                <a href="{% url 'updatepropietario' propietarios.cedula_propietario %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletepropietario' propietarios.cedula_propietario %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay propietarios registrados</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+

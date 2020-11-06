@@ -45,8 +45,9 @@ class Tipo_Producto(models.Model):
     nombre_tipo = models.CharField(max_length=70)
 
 class Product(models.Model):
-    #id_tipo = models.ForeignKey(Tipo_Producto, on_delete=models.CASCADE)
-    #id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    id = models.AutoField(auto_created=True, primary_key=True)
+    id_tipo = models.ForeignKey(Tipo_Producto, on_delete=models.CASCADE)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     nombre_producto = models.CharField(max_length=70)
     cantidad_producto = models.PositiveIntegerField()
     descripcion_producto = models.CharField(max_length=300)

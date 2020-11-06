@@ -2,9 +2,6 @@ from django.contrib import admin
 from .models import Product, Propietario, Proveedor, Tipo_Trabajador, Trabajador, Salario_Trabajador, Tipo_Producto, Mensajero, Ciudad, Comprador, Factura, Especificacion_Factura
 
 # Register your models here.
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre_producto', 'cantidad_producto','descripcion_producto', 'precio_unit')
 
 @admin.register(Propietario)
 class PropietarioAdmin(admin.ModelAdmin):
@@ -29,6 +26,10 @@ class Salario_TrabajadorAdmin(admin.ModelAdmin):
 @admin.register(Tipo_Producto)
 class Tipo_ProductoAdmin(admin.ModelAdmin):
     list_display = ('id_tipo', 'nombre_tipo')
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'id_tipo', 'id_proveedor', 'nombre_producto', 'cantidad_producto','descripcion_producto', 'precio_unit')
 
 @admin.register(Mensajero)
 class MensajeroAdmin(admin.ModelAdmin):

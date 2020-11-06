@@ -4,13 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Productos</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css' %}">
 </head>
 <body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">E-Bikes</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Tipo de productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Propietarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Proveedores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Compradores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Mensajeros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Ciudades</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Facturas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Especificacion facturas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Trabajadores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Tipo de trabajador</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="propietarios/">Salario trabajadores</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
     <div class="container mt-5">
 
         <h2 class="text-center alert alert-success" >E-bikes Fusagasugá</h2>
+        
         {% block content %} 
 
         {% endblock content %}
