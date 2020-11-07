@@ -22,16 +22,6 @@ class Tipo_Trabajador(models.Model):
     id_tipo = models.AutoField(auto_created=True, primary_key=True)
     tipo_trabajador = models.CharField(max_length=70)
 
-class Trabajador(models.Model):
-    cedula_trabajador = models.IntegerField(primary_key=True)
-    id_tipo = models.ForeignKey(Tipo_Trabajador, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=70)
-    apellido = models.CharField(max_length=70)
-    correo_electronico = models.EmailField(max_length=70)
-    direccion = models.CharField(max_length=70)
-    telefono = models.IntegerField()
-    fecha_nacimiento = models.DateField()
-
 class Salario_Trabajador(models.Model):
     id_salario = models.AutoField(auto_created=True, primary_key=True)
     sueldo_base = models.FloatField()
@@ -39,6 +29,17 @@ class Salario_Trabajador(models.Model):
     seguro_social = models.FloatField()
     pensiones = models.FloatField()
     sueldo_total = models.FloatField()
+
+class Trabajador(models.Model):
+    cedula_trabajador = models.IntegerField(primary_key=True)
+    id_salario = models.ForeignKey(Salario_Trabajador, on_delete=models.CASCADE)
+    id_tipo = models.ForeignKey(Tipo_Trabajador, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=70)
+    apellido = models.CharField(max_length=70)
+    correo_electronico = models.EmailField(max_length=70)
+    direccion = models.CharField(max_length=70)
+    telefono = models.IntegerField()
+    fecha_nacimiento = models.DateField()
 
 class Tipo_Producto(models.Model):
     id_tipo = models.AutoField(auto_created=True, primary_key=True)

@@ -1,0 +1,60 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir Trabajador</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Listado de trabajadores</h4>
+            {% if trabajador %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Cedula Trabajador</th>
+                        <th scope="col">Id_Salario</th>
+                        <th scope="col">Id Tipo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Correo electrónico</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Fecha de nacimiento</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for trabajadores in trabajador %}   
+                        <tr>
+                            <td>{{trabajadores.cedula_trabajador}}</td>
+                            <td>{{trabajadores.id_salario}}</td>
+                            <td>{{trabajadores.id_tipo}}</td>
+                            <td>{{trabajadores.nombre}}</td>
+                            <td>{{trabajadores.apellido}}</td>
+                            <td>{{trabajadores.correo_electronico}}</td>
+                            <td>{{trabajadores.direccion}}</td>
+                            <td>{{trabajadores.telefono}}</td>
+                            <td>{{trabajadores.fecha_nacimiento}}</td>
+                            <td>
+                                <a href="{% url 'updatetrabajador' trabajadores.cedula_trabajador %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletetrabajador' trabajadores.cedula_trabajador %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay trabajadores registrados</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+

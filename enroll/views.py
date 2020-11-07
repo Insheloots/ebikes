@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import ProductRegistration, PropietarioRegistration, Tipo_ProductoRegistration, PropietarioRegistration, ProveedorRegistration, CompradorRegistration, MensajeroRegistration, CiudadRegistration, FacturaRegistration, Especificacion_FacturaRegistration, Tipo_TrabajadorRegistration, Salario_TrabajadorRegistration
+from .forms import ProductRegistration, PropietarioRegistration, Tipo_ProductoRegistration, PropietarioRegistration, ProveedorRegistration, CompradorRegistration, MensajeroRegistration, CiudadRegistration, FacturaRegistration, Especificacion_FacturaRegistration, TrabajadorRegistration, Tipo_TrabajadorRegistration, Salario_TrabajadorRegistration
 from .models import Product, Propietario, Tipo_Producto, Propietario, Proveedor, Comprador, Mensajero, Ciudad, Factura, Especificacion_Factura, Trabajador, Tipo_Trabajador, Salario_Trabajador
 
 #----Vistas de productos----
@@ -267,3 +267,188 @@ def delete_ciudad(request, id_ciudad):
         pi = Ciudad.objects.get(pk=id_ciudad)
         pi.delete()
         return HttpResponseRedirect('/ciudad')
+
+
+#----Vistas de Factura----
+def add_factura(request):
+    if request.method == 'POST':
+        fm = FacturaRegistration(request.POST)
+        if fm.is_valid():
+            ip = fm.cleaned_data['id']
+            cc = fm.cleaned_data['cedula_comprador']
+            cm = fm.cleaned_data['cedula_mensajero']
+            fe = fm.cleaned_data['fecha_emision']
+            sb = fm.cleaned_data['subtotal']
+            iv = fm.cleaned_data['iva']
+            tt = fm.cleaned_data['total']
+            reg = Factura(id=ip, cedula_comprador=cc, cedula_mensajero=cm, fecha_emision=fe, subtotal=sb, iva=iv, total=tt)
+            reg.save()
+            fm = FacturaRegistration()
+    else:
+        fm = FacturaRegistration()
+    factura_add = Factura.objects.all()
+    return render(request, 'enroll/addfactura.html', {'form':fm, 'factura':factura_add})
+
+def update_factura(request, id_factura):
+    if request.method == 'POST':
+        pi = Factura.objects.get(pk=id_factura)
+        fm = FacturaRegistration(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = Factura.objects.get(pk=id_factura)
+        fm = FacturaRegistration(instance=pi)
+    return render(request, 'enroll/updatefactura.html', {'form':fm})
+
+def delete_factura(request, id_factura):
+    if request.method == 'POST':
+        pi = Factura.objects.get(pk=id_factura)
+        pi.delete()
+        return HttpResponseRedirect('/factura')
+
+
+#----Vistas de Especificación de Factura----
+def add_especificacionfactura(request):
+    if request.method == 'POST':
+        fm = Especificacion_FacturaRegistration(request.POST)
+        if fm.is_valid():
+            ie = fm.cleaned_data['id_especificacion']
+            ip = fm.cleaned_data['id']
+            ic = fm.cleaned_data['id_factura']
+            cc = fm.cleaned_data['cantidad_compra']
+            im = fm.cleaned_data['importe']
+            reg = Especificacion_Factura(id_especificacion=ie, id=ip, id_factura=ic, cantidad_compra=cc, importe=im)
+            reg.save()
+            fm = Especificacion_FacturaRegistration()
+    else:
+        fm = Especificacion_FacturaRegistration()
+    especificacionfactura_add = Especificacion_Factura.objects.all()
+    return render(request, 'enroll/addespecificacionfactura.html', {'form':fm, 'especificacionfactura':especificacionfactura_add})
+
+def update_especificacionfactura(request, id_especificacion):
+    if request.method == 'POST':
+        pi = Especificacion_Factura.objects.get(pk=id_especificacion)
+        fm = Especificacion_FacturaRegistration(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = Especificacion_Factura.objects.get(pk=id_especificacion)
+        fm = Especificacion_FacturaRegistration(instance=pi)
+    return render(request, 'enroll/updateespecificacionfactura.html', {'form':fm})
+
+def delete_especificacionfactura(request, id_especificacion):
+    if request.method == 'POST':
+        pi = Especificacion_Factura.objects.get(pk=id_especificacion)
+        pi.delete()
+        return HttpResponseRedirect('/especificacionfactura')
+
+
+#----Vistas de Trabajador----
+def add_trabajador(request):
+    if request.method == 'POST':
+        fm = TrabajadorRegistration(request.POST)
+        if fm.is_valid():
+            ct = fm.cleaned_data['cedula_trabajador']
+            ia = fm.cleaned_data['id_salario']
+            it = fm.cleaned_data['id_tipo']
+            nm = fm.cleaned_data['nombre']
+            ap = fm.cleaned_data['apellido']
+            ce = fm.cleaned_data['correo_electronico']
+            di = fm.cleaned_data['direccion']
+            te = fm.cleaned_data['telefono']
+            fn = fm.cleaned_data['fecha_nacimiento']
+            reg = Trabajador(cedula_trabajador=ct, id_salario=ia, id_tipo=it, nombre=nm, apellido=ap, correo_electronico=ce, direccion=di, telefono=te, fecha_nacimiento=fn)
+            reg.save()
+            fm = TrabajadorRegistration()
+    else:
+        fm = TrabajadorRegistration()
+    trabajador_add = Trabajador.objects.all()
+    return render(request, 'enroll/addtrabajador.html', {'form':fm, 'trabajador':trabajador_add})
+
+
+def update_trabajador(request, cedula_trabajador):
+    if request.method == 'POST':
+        pi = Trabajador.objects.get(pk=cedula_trabajador)
+        fm = TrabajadorRegistration(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = Trabajador.objects.get(pk=cedula_trabajador)
+        fm = TrabajadorRegistration(instance=pi)
+    return render(request, 'enroll/updatetrabajador.html', {'form':fm})
+
+
+def delete_trabajador(request, cedula_trabajador):
+    if request.method == 'POST':
+        pi = Trabajador.objects.get(pk=cedula_trabajador)
+        pi.delete()
+        return HttpResponseRedirect('/trabajador')
+
+
+#----Vistas de Tipo trabajador----
+def add_tipotrabajador(request):
+    if request.method == 'POST':
+        fm = Tipo_TrabajadorRegistration(request.POST)
+        if fm.is_valid():
+            tp = fm.cleaned_data['tipo_trabajador']
+            reg = Tipo_Trabajador(tipo_trabajador=tp)
+            reg.save()
+            fm = Tipo_TrabajadorRegistration()
+    else:
+        fm = Tipo_TrabajadorRegistration()
+    tipotrabajador_add = Tipo_Trabajador.objects.all()
+    return render(request, 'enroll/addtipotrabajador.html', {'form':fm, 'tipotrabajador':tipotrabajador_add})
+
+def update_tipotrabajador(request, id_tipo):
+    if request.method == 'POST':
+        pi = Tipo_Trabajador.objects.get(pk=id_tipo)
+        fm = Tipo_TrabajadorRegistration(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = Tipo_Trabajador.objects.get(pk=id_tipo)
+        fm = Tipo_TrabajadorRegistration(instance=pi)
+    return render(request, 'enroll/updatetipotrabajador.html', {'form':fm})
+
+def delete_tipotrabajador(request, id_tipo):
+    if request.method == 'POST':
+        pi = Tipo_Trabajador.objects.get(pk=id_tipo)
+        pi.delete()
+        return HttpResponseRedirect('/tipotrabajador')
+
+
+#----Vistas de Salarios----
+def add_salario(request):
+    if request.method == 'POST':
+        fm = Salario_TrabajadorRegistration(request.POST)
+        if fm.is_valid():
+            ia = fm.cleaned_data['id_salario']
+            sb = fm.cleaned_data['sueldo_base']
+            ho = fm.cleaned_data['honorarios']
+            ss = fm.cleaned_data['seguro_social']
+            pe = fm.cleaned_data['pensiones']
+            st = fm.cleaned_data['sueldo_total']
+            reg = Salario_Trabajador(id_salario=ia, sueldo_base=sb, honorarios=ho, seguro_social=ss, pensiones=pe, sueldo_total=st)
+            reg.save()
+            fm = Salario_TrabajadorRegistration()
+    else:
+        fm = Salario_TrabajadorRegistration()
+    salario_add = Salario_Trabajador.objects.all()
+    return render(request, 'enroll/addsalario.html', {'form':fm, 'salario':salario_add})
+
+def update_salario(request, id_salario):
+    if request.method == 'POST':
+        pi = Salario_Trabajador.objects.get(pk=id_salario)
+        fm = Salario_TrabajadorRegistration(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = Salario_Trabajador.objects.get(pk=id_salario)
+        fm = Salario_TrabajadorRegistration(instance=pi)
+    return render(request, 'enroll/updatesalario.html', {'form':fm})
+
+def delete_salario(request, id_salario):
+    if request.method == 'POST':
+        pi = Salario_Trabajador.objects.get(pk=id_salario)
+        pi.delete()
+        return HttpResponseRedirect('/salario')

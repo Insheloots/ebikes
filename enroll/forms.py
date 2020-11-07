@@ -114,9 +114,10 @@ class Especificacion_FacturaRegistration(forms.ModelForm):
 class TrabajadorRegistration(forms.ModelForm):
     class Meta:
         model = Trabajador
-        fields = ['cedula_trabajador', 'id_tipo', 'nombre', 'apellido', 'correo_electronico', 'direccion', 'telefono', 'fecha_nacimiento']
+        fields = ['cedula_trabajador', 'id_salario', 'id_tipo', 'nombre', 'apellido', 'correo_electronico', 'direccion', 'telefono', 'fecha_nacimiento']
         widgets = {
             'cedula_trabajador': forms.NumberInput(attrs={'class':'form-control'}),  
+            'id_salario': forms.NumberInput(attrs={'class':'form-control'}),  
             'id_tipo': forms.NumberInput(attrs={'class':'form-control'}),  
             'nombre': forms.TextInput(attrs={'class':'form-control'}),  
             'apellido': forms.TextInput(attrs={'class':'form-control'}),  

@@ -1,0 +1,52 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir Especificación factura</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Especificaciones de facturas</h4>
+            {% if especificacionfactura %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id Especificacion</th>
+                        <th scope="col">Id Producto</th>
+                        <th scope="col">Id Factura</th>
+                        <th scope="col">Cantidad Compra</th>
+                        <th scope="col">Importe</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for especificacionfacturas in especificacionfactura %}   
+                        <tr>
+                            <td>{{especificacionfacturas.id_especificacion}}</td>
+                            <td>{{especificacionfacturas.id}}</td>
+                            <td>{{especificacionfacturas.id_factura}}</td>
+                            <td>{{especificacionfacturas.cantidad_compra}}</td>
+                            <td>{{especificacionfacturas.importe}}</td>
+                            <td>
+                                <a href="{% url 'updateespecificacionfactura' especificacionfacturas.id_especificacion %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deleteespecificacionfactura' especificacionfacturas.id_especificacion %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay Especificacion de facturas registradas</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+

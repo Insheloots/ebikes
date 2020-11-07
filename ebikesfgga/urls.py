@@ -38,4 +38,29 @@ urlpatterns = [
     path('ciudad/', views.add_ciudad, name="addciudad" ),
     path('ciudad/delete/<int:id_ciudad>/', views.delete_ciudad, name="deleteciudad"),
     path('ciudad/<int:id_ciudad>/', views.update_ciudad, name="updateciudad"),
+    
+    #Vistas de factura
+    path('factura/', views.add_factura, name="addfactura" ),
+    path('factura/delete/<int:id_factura>/', views.delete_factura, name="deletefactura"),
+    path('factura/<int:id_factura>/', views.update_factura, name="updatefactura"),
+
+    #Vistas de Especificacion factura
+    path('especificacionfactura/', views.add_especificacionfactura, name="addespecificacionfactura" ),
+    path('especificacionfactura/delete/<int:id_especificacion>/', views.delete_especificacionfactura, name="deleteespecificacionfactura"),
+    path('especificacionfactura/<int:id_especificacion>/', views.update_especificacionfactura, name="updateespecificacionfactura"),
+
+    #Vistas de Trabajador
+    path('trabajador/', views.add_trabajador, name="addtrabajador" ),
+    path('trabajador/delete/<int:cedula_trabajador>/', views.delete_trabajador, name="deletetrabajador"),
+    path('trabajador/<int:cedula_trabajador>/', views.update_trabajador, name="updatetrabajador"),
+
+    #Vistas de Tipo Trabajador
+    path('tipotrabajador/', views.add_tipotrabajador, name="addtipotrabajador" ),
+    path('tipotrabajador/delete/<int:id_tipo>/', views.delete_tipotrabajador, name="deletetipotrabajador"),
+    path('tipotrabajador/<int:id_tipo>/', views.update_tipotrabajador, name="updatetipotrabajador"),
+
+    #Vistas de Salario Trabajador
+    path('salario/', views.add_salario, name="addsalario" ),
+    path('salario/delete/<int:id_salario>/', views.delete_salario, name="deletesalario"),
+    path('salario/<int:id_salario>/', views.update_salario, name="updatesalario"),
 ]

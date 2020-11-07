@@ -17,7 +17,7 @@ class Tipo_TrabajadorAdmin(admin.ModelAdmin):
 
 @admin.register(Trabajador)
 class TrabajadorAdmin(admin.ModelAdmin):
-    list_display = ('cedula_trabajador', 'id_tipo', 'nombre', 'apellido','correo_electronico', 'direccion', 'telefono', 'fecha_nacimiento')
+    list_display = ('cedula_trabajador', 'id_salario', 'id_tipo', 'nombre', 'apellido','correo_electronico', 'direccion', 'telefono', 'fecha_nacimiento')
 
 @admin.register(Salario_Trabajador)
 class Salario_TrabajadorAdmin(admin.ModelAdmin):

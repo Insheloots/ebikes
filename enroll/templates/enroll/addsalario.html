@@ -1,0 +1,54 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir Salarios</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Salarios</h4>
+            {% if salario %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id Salario</th>
+                        <th scope="col">Sueldo base</th>
+                        <th scope="col">Honorarios</th>
+                        <th scope="col">Seguro Social</th>
+                        <th scope="col">Pensiones</th>
+                        <th scope="col">Sueldo Total</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for salarios in salario %}   
+                        <tr>
+                            <td>{{salarios.id_salario}}</td>
+                            <td>{{salarios.sueldo_base}}</td>
+                            <td>{{salarios.honorarios}}</td>
+                            <td>{{salarios.seguro_social}}</td>
+                            <td>{{salarios.pensiones}}</td>
+                            <td>{{salarios.sueldo_total}}</td>
+                            <td>
+                                <a href="{% url 'updatesalario' salarios.id_salario %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletesalario' salarios.id_salario %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay salarios registradas</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+

@@ -1,0 +1,58 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir Factura</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Facturas</h4>
+            {% if factura %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id Factura</th>
+                        <th scope="col">Id Producto</th>
+                        <th scope="col">Cedula Comprador</th>
+                        <th scope="col">Cedula Mensajero</th>
+                        <th scope="col">Fecha emisión</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">IVA</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for facturas in factura %}   
+                        <tr>
+                            <td>{{facturas.id_factura}}</td>
+                            <td>{{facturas.id}}</td>
+                            <td>{{facturas.cedula_comprador}}</td>
+                            <td>{{facturas.cedula_mensajero}}</td>
+                            <td>{{facturas.fecha_emision}}</td>
+                            <td>{{facturas.subtotal}}</td>
+                            <td>{{facturas.iva}}</td>
+                            <td>{{facturas.total}}</td>
+                            <td>
+                                <a href="{% url 'updatefactura' facturas.id_factura %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletefactura' facturas.id_factura %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay facturas registradas</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+
