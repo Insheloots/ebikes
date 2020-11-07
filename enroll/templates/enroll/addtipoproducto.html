@@ -1,0 +1,46 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir tipo de producto</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Tipos de productos</h4>
+            {% if tipoproducto %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id_tipo</th>
+                        <th scope="col">Nombre Tipo de producto</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for tipoproductos in tipoproducto %}   
+                        <tr>
+                            <td>{{tipoproductos.id_tipo}}</td>
+                            <td>{{tipoproductos.nombre_tipo}}</td>
+                            <td>
+                                <a href="{% url 'updatetipoproducto' tipoproductos.id_tipo %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletetipoproducto' tipoproductos.id_tipo %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay tipos de productos registrados</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+

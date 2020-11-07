@@ -2,7 +2,7 @@
 {% block content  %}
     <div class="row">
         <div class="col-sm-3">
-            <h4 class="text-center alert alert-info">Añadir propietario</h4>
+            <h4 class="text-center alert alert-info">Añadir mensajero</h4>
             <form action=" " method="POST">
                 {% csrf_token %}
                 {{form.as_p}}
@@ -11,12 +11,12 @@
             <a class="btn btn-secondary btn-block" href="/">Volver</a>
         </div>
         <div class="col-sm-9">
-            <h4 class="text-center alert alert-secondary">Listado de Propietarios</h4>
-            {% if propietario %}
+            <h4 class="text-center alert alert-secondary">Listado de mensajeros</h4>
+            {% if mensajero %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Cedula</th>
+                        <th scope="col">Cedula mensajero</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Correo electrónico</th>
@@ -27,18 +27,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for propietarios in propietario %}   
+                        {% for mensajeros in mensajero %}   
                         <tr>
-                            <td>{{propietarios.cedula_propietario}}</td>
-                            <td>{{propietarios.nombre}}</td>
-                            <td>{{propietarios.apellido}}</td>
-                            <td>{{propietarios.correo_electronico}}</td>
-                            <td>{{propietarios.direccion}}</td>
-                            <td>{{propietarios.telefono}}</td>
-                            <td>{{propietarios.fecha_nacimiento}}</td>
+                            <td>{{mensajeros.cedula_mensajero}}</td>
+                            <td>{{mensajeros.nombre}}</td>
+                            <td>{{mensajeros.apellido}}</td>
+                            <td>{{mensajeros.correo_electronico}}</td>
+                            <td>{{mensajeros.direccion}}</td>
+                            <td>{{mensajeros.telefono}}</td>
+                            <td>{{mensajeros.fecha_nacimiento}}</td>
                             <td>
-                                <a href="{% url 'updatepropietario' propietarios.cedula_propietario %}" class="btn btn-secondary bt-sm" >Editar</a>
-                                <form action="{% url 'deletepropietario' propietarios.cedula_propietario %}" method="post" class="d-inline"> {% csrf_token %}
+                                <a href="{% url 'updatemensajero' mensajeros.cedula_mensajero %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletemensajero' mensajeros.cedula_mensajero %}" method="post" class="d-inline"> {% csrf_token %}
                                     <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
                                 </form>
                                 
@@ -48,7 +48,7 @@
                     </tbody>
                 </table>
             {% else %}
-                <h4 class="text-center alert alert-warning">No hay propietarios registrados</h4>    
+                <h4 class="text-center alert alert-warning">No hay mensajeros registrados</h4>    
             {%  endif %}
         </div>
     </div>

@@ -1,0 +1,46 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir ciudad</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Ciudades</h4>
+            {% if ciudad %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id_Ciudad</th>
+                        <th scope="col">Nombre Ciudad</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for ciudades in ciudad %}   
+                        <tr>
+                            <td>{{ciudades.id_ciudad}}</td>
+                            <td>{{ciudades.nombre_ciudad}}</td>
+                            <td>
+                                <a href="{% url 'updateciudad' ciudades.id_ciudad %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deleteciudad' ciudades.id_ciudad %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay ciudades registradas</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+

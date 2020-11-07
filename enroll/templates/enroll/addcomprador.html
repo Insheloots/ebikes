@@ -2,7 +2,7 @@
 {% block content  %}
     <div class="row">
         <div class="col-sm-3">
-            <h4 class="text-center alert alert-info">Añadir propietario</h4>
+            <h4 class="text-center alert alert-info">Añadir Comprador</h4>
             <form action=" " method="POST">
                 {% csrf_token %}
                 {{form.as_p}}
@@ -11,12 +11,13 @@
             <a class="btn btn-secondary btn-block" href="/">Volver</a>
         </div>
         <div class="col-sm-9">
-            <h4 class="text-center alert alert-secondary">Listado de Propietarios</h4>
-            {% if propietario %}
+            <h4 class="text-center alert alert-secondary">Compradores</h4>
+            {% if comprador %}
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Cedula</th>
+                        <th scope="col">Id_Ciudad</th>
+                        <th scope="col">Cedula Comprador</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Correo electrónico</th>
@@ -27,18 +28,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                        {% for propietarios in propietario %}   
+                        {% for compradores in comprador %}   
                         <tr>
-                            <td>{{propietarios.cedula_propietario}}</td>
-                            <td>{{propietarios.nombre}}</td>
-                            <td>{{propietarios.apellido}}</td>
-                            <td>{{propietarios.correo_electronico}}</td>
-                            <td>{{propietarios.direccion}}</td>
-                            <td>{{propietarios.telefono}}</td>
-                            <td>{{propietarios.fecha_nacimiento}}</td>
+                            <td>{{compradores.id_ciudad}}</td>
+                            <td>{{compradores.cedula_comprador}}</td>
+                            <td>{{compradores.nombre}}</td>
+                            <td>{{compradores.apellido}}</td>
+                            <td>{{compradores.correo_electronico}}</td>
+                            <td>{{compradores.direccion}}</td>
+                            <td>{{compradores.telefono}}</td>
+                            <td>{{compradores.fecha_nacimiento}}</td>
                             <td>
-                                <a href="{% url 'updatepropietario' propietarios.cedula_propietario %}" class="btn btn-secondary bt-sm" >Editar</a>
-                                <form action="{% url 'deletepropietario' propietarios.cedula_propietario %}" method="post" class="d-inline"> {% csrf_token %}
+                                <a href="{% url 'updatecomprador' compradores.cedula_comprador %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deletecomprador' compradores.cedula_comprador %}" method="post" class="d-inline"> {% csrf_token %}
                                     <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
                                 </form>
                                 
@@ -48,7 +50,7 @@
                     </tbody>
                 </table>
             {% else %}
-                <h4 class="text-center alert alert-warning">No hay propietarios registrados</h4>    
+                <h4 class="text-center alert alert-warning">No hay compradores registrados</h4>    
             {%  endif %}
         </div>
     </div>

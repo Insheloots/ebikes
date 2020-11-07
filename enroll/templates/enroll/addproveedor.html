@@ -1,0 +1,54 @@
+{% extends 'enroll/base.html' %}
+{% block content  %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h4 class="text-center alert alert-info">Añadir Proveedor</h4>
+            <form action=" " method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+            </form>
+            <a class="btn btn-secondary btn-block" href="/">Volver</a>
+        </div>
+        <div class="col-sm-9">
+            <h4 class="text-center alert alert-secondary">Listado de Proveedores</h4>
+            {% if proveedor %}
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id_Proveedor</th>
+                        <th scope="col">Cedula Propietario</th>
+                        <th scope="col">Nombre Proveedor</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo electrónico</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for proveedores in proveedor %}   
+                        <tr>
+                            <td>{{proveedores.id_proveedor}}</td>
+                            <td>{{proveedores.cedula_propietario}}</td>
+                            <td>{{proveedores.nombre_proveedor}}</td>
+                            <td>{{proveedores.direccion}}</td>
+                            <td>{{proveedores.telefono}}</td>
+                            <td>{{proveedores.correo_electronico}}</td>
+                            <td>
+                                <a href="{% url 'updateproveedor' proveedores.id_proveedor %}" class="btn btn-secondary bt-sm" >Editar</a>
+                                <form action="{% url 'deleteproveedor' proveedores.id_proveedor %}" method="post" class="d-inline"> {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger bt-sm" value="Borrar">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h4 class="text-center alert alert-warning">No hay proveedores registrados</h4>    
+            {%  endif %}
+        </div>
+    </div>
+{% endblock content  %}
+
