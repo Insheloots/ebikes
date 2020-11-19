@@ -6,14 +6,15 @@
             <form action=" " method="POST">
                 {% csrf_token %}
                 {{form.as_p}}
-                <input type="submit" class="btn btn-success btn-block" value="Agregar" >
+                <input type="submit" class="btn btn-success btn-block mb-2" value="Agregar" >
             </form>
             <a class="btn btn-secondary btn-block" href="/">Volver</a>
         </div>
         <div class="col-sm-9">
             <h4 class="text-center alert alert-secondary">Especificaciones de facturas</h4>
             {% if especificacionfactura %}
-                <table class="table">
+            <div class="table-responsive text-nowrap" style="height: 600px;overflow: scroll;">
+                <table class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Id Especificacion</th>
@@ -43,6 +44,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
             {% else %}
                 <h4 class="text-center alert alert-warning">No hay Especificacion de facturas registradas</h4>    
             {%  endif %}

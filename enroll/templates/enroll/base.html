@@ -9,49 +9,54 @@
 </head>
 <body>
     <header class="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <a class="navbar-brand" href="/">E-Bikes</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-        
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="nav navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="/">Productos</a>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Productos</span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu bg-dark">
+                      <li><a class="nav-link text-light" href="/">Productos</a></li>
+                      <li><a class="nav-link text-light" href="/tipoproducto">Tipo productos</a></li>
+                  </ul>
+              </li>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/tipoproducto">Tipo de productos</a>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Compras</span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu bg-dark">
+                      <li><a class="nav-link text-light" href="/comprador">Compradores</a></li>
+                      <li><a class="nav-link text-light" href="/factura">Factura</a></li>
+                      <li><a class="nav-link text-light" href="/especificacionfactura">Especificación factura</a></li>
+                      <li><a class="nav-link text-light" href="/ciudad">Ciudades</a></li>
+                  </ul>
+              </li>
+              </li>
+              <li class="nav-item">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Trabajador</span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu bg-dark">
+                      <li><a class="nav-link text-light" href="/trabajador">Trabajador</a></li>
+                      <li><a class="nav-link text-light" href="/tipotrabajador">Tipo trabajador</a></li>
+                      <li><a class="nav-link text-light" href="/salario">Salario</a></li>
+                  </ul>
+              </li>
+              </li>
+              <li class="nav-item">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Externos</span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu bg-dark">
+                      <li><a class="nav-link text-light" href="/proveedor">Proveedor</a></li>
+                      <li><a class="nav-link text-light" href="/mensajero">Mensajeros</a></li>
+                  </ul>
+              </li>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/propietarios">Propietarios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/proveedor">Proveedores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/comprador">Compradores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/mensajero">Mensajeros</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/ciudad">Ciudades</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/factura">Facturas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/especificacionfactura">Especificacion facturas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/trabajador">Trabajadores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/tipotrabajador">Tipo de trabajador</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/salario">Salario trabajadores</a>
               </li>
             </ul>
           </div>
